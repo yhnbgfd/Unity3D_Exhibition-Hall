@@ -1,6 +1,6 @@
-#pragma strict
-#pragma implicit
-#pragma downcast
+//#pragma strict
+//#pragma implicit
+//#pragma downcast
 
 // Does this script currently respond to input?
 var canControl : boolean = true;
@@ -181,6 +181,9 @@ function Awake () {
 }
 
 private function UpdateFunction () {
+	var test = gameObject.GetComponent("test1");
+	var testInt : int = test.Test();
+	
 	// We copy the actual velocity into a temporary variable that we can manipulate.
 	var velocity : Vector3 = movement.velocity;
 	
