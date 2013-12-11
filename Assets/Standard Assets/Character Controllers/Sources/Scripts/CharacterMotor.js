@@ -181,8 +181,6 @@ function Awake () {
 }
 
 private function UpdateFunction () {
-	var test = gameObject.GetComponent("test1");
-	var testInt : int = test.Test();
 	
 	// We copy the actual velocity into a temporary variable that we can manipulate.
 	var velocity : Vector3 = movement.velocity;
