@@ -15,7 +15,7 @@ public class LMGesture {
 
 	public float getMouseX() {
 		Vector3 lookPosition = lm.FingertipPosition();
-		Debug.Log(lookPosition.x);
+		//Debug.Log(lookPosition.x);
 
 
 		return 0.0f;

@@ -30,16 +30,17 @@ public class MouseLook : MonoBehaviour {
 
 	float rotationY = 0F;
 
+	LMGesture lg;
+
 	void Update ()
 	{
 		if (axes == RotationAxes.MouseXAndY)
 		{
-			float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
-			
-			rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+			//float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
+			float rotationX = transform.localEulerAngles.y + lg.getMouseX() * sensitivityX;
 
-			LMGesture lg = new LMGesture();
-			lg.getMouseX();
+			//rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+			rotationY += lg.getMouseY() * sensitivityY;
 
 			rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
@@ -63,5 +64,6 @@ public class MouseLook : MonoBehaviour {
 		// Make the rigid body not change rotation
 		if (rigidbody)
 			rigidbody.freezeRotation = true;
+		lg = new LMGesture();
 	}
 }
