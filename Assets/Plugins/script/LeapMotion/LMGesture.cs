@@ -51,6 +51,10 @@ public class LMGesture {
 		}
 		introY = 200.0f;
 		Vector3 lookPosition = lm.FingertipPosition();
+		if(lm.getHandsNum() == 0)
+		{
+			return 0.0f;
+		}
 
 		Debug.Log(lookPosition.y - introY);
 		if(lookPosition.y - introY > 0)
