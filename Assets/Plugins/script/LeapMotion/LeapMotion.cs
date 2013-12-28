@@ -34,6 +34,18 @@ public class LeapMotion {
 		return false;
     }
 
+	public bool CheckLMConnection()
+	{
+		if(controller.IsConnected)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	public int TwoHandsPostition(string axis)
 	{
 		if(!ProcessFrame()) return 0;

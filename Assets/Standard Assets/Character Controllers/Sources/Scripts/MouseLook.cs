@@ -36,10 +36,16 @@ public class MouseLook : MonoBehaviour {
 	{
 		if (axes == RotationAxes.MouseXAndY)
 		{
-			//float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
-			float rotationX = transform.localEulerAngles.y + lg.getMouseX() * sensitivityX;
+			float rotationX;
+			if(lg.CheckLMConnection())
+			{
+				rotationX = transform.localEulerAngles.y + lg.getMouseX() * sensitivityX;
+			}
+			else
+			{
+				rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
+			}
 			//rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-			//rotationY += lg.getMouseY() * sensitivityY;
 			//rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
 			transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
@@ -50,8 +56,14 @@ public class MouseLook : MonoBehaviour {
 		}
 		else
 		{
-			//rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-			rotationY += lg.getMouseY() * sensitivityY;
+			if(lg.CheckLMConnection())
+			{
+				rotationY += lg.getMouseY() * sensitivityY;
+			}
+			else
+			{
+				rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+			}
 			rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
 			transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);

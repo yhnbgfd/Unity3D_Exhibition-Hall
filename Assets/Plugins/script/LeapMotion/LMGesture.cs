@@ -10,7 +10,19 @@ public class LMGesture {
 	public LMGesture () {
 		lm = new LeapMotion();
 	}
-	
+
+	public bool CheckLMConnection()
+	{
+		if(lm.CheckLMConnection())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	public void Moving() {
 		Vector3 movePosition = lm.PalmPosition(0,0,0,0);
 	}
