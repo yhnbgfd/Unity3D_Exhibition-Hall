@@ -44,17 +44,24 @@ public class MouseLook : MonoBehaviour {
 			else
 			{
 				rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
+				rotationY += Input.GetAxis("Mouse Y") * sensitivityY;	//Does not work
+				rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);	//Does not work
 			}
-			//rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-			//rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
 			transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
 		}
-		else if (axes == RotationAxes.MouseX)
+		else if (axes == RotationAxes.MouseX)	//Like with MouseXAndY
 		{
-			//transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
+			if(lg.CheckLMConnection())
+			{
+				transform.Rotate(0, lg.getMouseX() * sensitivityX, 0);
+			}
+			else
+			{
+				transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
+			}
 		}
-		else
+		else 	//Have been working
 		{
 			if(lg.CheckLMConnection())
 			{
