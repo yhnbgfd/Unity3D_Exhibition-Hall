@@ -23,8 +23,9 @@ public class LMGesture {
 		}
 	}
 
-	public void Moving() {
+	public Vector3 Moving() {
 		Vector3 movePosition = lm.PalmPosition(0,0,0,0);
+		return movePosition;
 	}
 
 	public float getMouseX() {

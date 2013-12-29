@@ -1,12 +1,16 @@
 private var motor : CharacterMotor;
+private var bridge;
 
 // Use this for initialization
 function Awake () {
 	motor = GetComponent(CharacterMotor);
+	bridge = gameObject.GetComponent("JSBridge");
 }
 
 // Update is called once per frame
 function Update () {
+	var test = bridge.Move();
+	//Debug.Log(test);
 	// Get the input vector from keyboard or analog stick
 	var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 	
