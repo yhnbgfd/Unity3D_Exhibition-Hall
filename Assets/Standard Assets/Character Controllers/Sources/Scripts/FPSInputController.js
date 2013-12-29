@@ -9,10 +9,9 @@ function Awake () {
 
 // Update is called once per frame
 function Update () {
-	var test = bridge.Move();
-	//Debug.Log(test);
 	// Get the input vector from keyboard or analog stick
 	var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+	//Debug.Log(Input.GetAxis("Horizontal")+"___"+Input.GetAxis("Vertical"));
 	
 	if (directionVector != Vector3.zero) {
 		// Get the length of the directon vector and then normalize it

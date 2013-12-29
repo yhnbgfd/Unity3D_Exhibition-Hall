@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class JSBridge : MonoBehaviour {
-
+	private LMGesture lg;
 	// Use this for initialization
 	void Start () {
-	
+		lg = new LMGesture();
 	}
 	
 	// Update is called once per frame
@@ -13,18 +13,14 @@ public class JSBridge : MonoBehaviour {
 	
 	}
 
-	int Test()
+
+	float MoveHorizontal()
 	{
-		Debug.Log("js asd");
-		return 1;
+		return lg.MoveHorizontal();//-1~1
 	}
 
-	float Move()
+	float MoveVertical()
 	{
-		LMGesture lg = new LMGesture();
-		float x = lg.Moving().x;
-		float y = lg.Moving().y;
-		float z = lg.Moving().z;
-		return x;
+		return lg.MoveVertical();//-1~1
 	}
 }
