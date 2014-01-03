@@ -11,6 +11,7 @@ function Awake () {
 function Update () {
 	// Get the input vector from keyboard or analog stick
 	var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+	//var directionVector = new Vector3(bridge.MoveHorizontal(), 0, bridge.MoveVertical());
 	//Debug.Log(Input.GetAxis("Horizontal")+"___"+Input.GetAxis("Vertical"));
 	
 	if (directionVector != Vector3.zero) {
