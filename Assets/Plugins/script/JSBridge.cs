@@ -13,6 +13,10 @@ public class JSBridge : MonoBehaviour {
 	
 	}
 
+	bool CheckLeapMotionConnection()
+	{
+		return lg.CheckLMConnection();
+	}
 
 	float MoveHorizontal()
 	{
