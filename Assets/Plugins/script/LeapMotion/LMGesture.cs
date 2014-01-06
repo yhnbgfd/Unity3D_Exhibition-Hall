@@ -37,7 +37,7 @@ public class LMGesture {
 	}
 
 	public float getMouseX() {
-		if(lm.getHandsNum() == 0)
+		if(lm.getHandsNum() == 0 || lm.getFingersNum() > 2)
 		{
 			return 0.0f;
 		}
@@ -97,16 +97,16 @@ public class LMGesture {
 	}
 
 	public float getMouseY() {
+		if(lm.getHandsNum() == 0 || lm.getFingersNum() > 2)
+		{
+			return 0.0f;
+		}
 		if(lm.HandEnter())
 		{
 			introY = lm.FingertipPosition().y;
 		}
 		introY = 200.0f;
 		Vector3 lookPosition = lm.FingertipPosition();
-		if(lm.getHandsNum() == 0)
-		{
-			return 0.0f;
-		}
 		if(lookPosition.y - introY > 50)
 		{
 			return 0.05f;
