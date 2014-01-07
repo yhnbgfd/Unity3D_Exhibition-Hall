@@ -4,44 +4,64 @@ using System.Collections;
 public class NavMeshTest : MonoBehaviour {
 	private LeapMotion lm;
 	private NavMeshAgent man;
-	public Transform target;
+	private Transform target;
+
+	private string CurrentRoute = "a";
+	private string NextRoute;
+	private int Sections = 0;
+
 	// Use this for initialization
 	void Start () {
 		man = gameObject.GetComponent<NavMeshAgent>();
 		lm = new LeapMotion();
+		NextRoute = CurrentRoute;
+		target = GameObject.Find("NavRotue/"+CurrentRoute+"/" + Sections.ToString() ).transform;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(lm.getFingersNum() == 5)
 		{
-			man.SetDestination(target.position);
-			if(man.destination == man.nextPosition)
+			if(CurrentRoute == NextRoute && man.destination != man.nextPosition)
 			{
-				if(GameObject.Find(goOn (target.name)))
+				man.SetDestination(target.position);
+				if(man.destination == man.nextPosition)
 				{
-					target = GameObject.Find(goOn (target.name)).transform;
-				}
-				else
-				{
-					//Debug.Log("end");
+					Sections++;
+					if(GameObject.Find("NavRotue/"+CurrentRoute+"/" + Sections.ToString() ))
+					{
+						Debug.Log("find: "+CurrentRoute+"_"+Sections);
+						target = GameObject.Find("NavRotue/"+CurrentRoute+"/" + Sections.ToString() ).transform;
+					}
+					else
+					{
+						Debug.Log(CurrentRoute + " end");
+						if(lm.Swipe("x") > 0)
+						{
+							setNextRoute("c");
+						}
+						else if(lm.Swipe("x") < 0)
+						{
+							setNextRoute("b");
+						}
+					}
 				}
 			}
+			else
+			{
+				CurrentRoute = NextRoute;
+			}
 		}
-		else if(lm.getFingersNum() < 5)
+		else if(lm.getFingersNum() < 4)
 		{
 			man.SetDestination(man.nextPosition);
 		}
 	}
 
-	private string goOn(string route)
+	public void setNextRoute(string route)
 	{
-		string nextNode = "";
-		string[] routeSplit = route.Split('_');
-		nextNode += routeSplit[0]+"_";
-		nextNode += routeSplit[1]+"_";
-		nextNode += routeSplit[2].Substring(0,1);
-		nextNode += ((int.Parse(routeSplit[2].Substring(1)))+1).ToString();
-		return nextNode;
+		NextRoute = route ;
+		Sections = 0;
 	}
+
 }
