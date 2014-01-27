@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StoneAntClassLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:StoneAnt.LeapMotion.LeapMotionGesture">
+            <summary>
+            LeapMotion 手势
+            </summary>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionGesture.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionGesture.Circle">
+            <summary>
+            画圈手势
+            顺时针返回：1
+            逆时针返回：2
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionGesture.FingersShrink">
+            <summary>
+            五指收缩手势
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionGesture.FingersExpand">
+            <summary>
+            五指张开手势
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionGesture.Swipe(System.String)">
+            <summary>
+            手掌滑动手势
+            参数：坐标轴X Y Z
+            返回：1 正方向、2 负方向
+            </summary>
+            <param name="axis">坐标轴X Y Z</param>
+            <returns>1 正方向、2 负方向</returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionGesture.FingerSwipe(System.String)">
+            <summary>
+            手指滑动手势
+            </summary>
+            <param name="axis"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionGesture.SwipeWithTwoHands(System.String)">
+            <summary>
+            两只手滑动
+            触发效果非常差
+            </summary>
+            <param name="axis"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionGesture.SwipeWithTwoFingers(System.String)">
+            <summary>
+            两只手指滑动
+            </summary>
+            <param name="axis"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionInitialize.#cctor">
+            <summary>
+            静态构造函数
+            </summary>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionInitialize.EnableGesture">
+            <summary>
+            LM自带手势开启
+            </summary>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionInitialize.GetFrame">
+            <summary>
+            获取当前帧
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionInitialize.GetFrame(System.Int32)">
+            <summary>
+            获取非当前帧
+            </summary>
+            <param name="i"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionInitialize.CheckConnection">
+            <summary>
+            检查LM是否连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:StoneAnt.LeapMotion.LeapMotionParameter">
+            <summary>
+            获取LeapMotion各种参数
+            </summary>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionParameter.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionParameter.IsConnected">
+            <summary>
+            检查LM连接状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionParameter.GetHandsNumber">
+            <summary>
+            获取当前识别到的手的数量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionParameter.GetFingersNumber">
+            <summary>
+            获取第一只手被识别出的手指数量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionParameter.GetPalmPosition">
+            <summary>
+            获取第一只手手掌的坐标
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionParameter.GetFingertipPosition">
+            <summary>
+            获取第一只手的第一根手指指尖的坐标
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionParameter.GetFingersID">
+            <summary>
+            获取第一只手的手指的ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionParameter.GetFingersID(Leap.Frame)">
+            <summary>
+            获取第一只手的手指的ID
+            </summary>
+            <param name="LMFrame"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

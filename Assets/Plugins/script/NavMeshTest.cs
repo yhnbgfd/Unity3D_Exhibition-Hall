@@ -1,28 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using StoneAnt.LeapMotion;
+
 public class NavMeshTest : MonoBehaviour {
-	private LeapMotion lm;
+	//private LeapMotion lm;
+	private LeapMotionGesture LG;
+	private LeapMotionParameter LP;
 	private NavMeshAgent man;
 	private Transform target;
 
-	private string CurrentRoute = "a";
+	private string CurrentRoute;
 	private string NextRoute;
-	private int Sections = 0;
+	private int Sections;
 
 	private bool StartWalking = true;
 
 	// Use this for initialization
 	void Start () {
 		man = gameObject.GetComponent<NavMeshAgent>();
-		lm = new LeapMotion();
+		//lm = new LeapMotion();
+		LG = new LeapMotionGesture ();
+		LP = new LeapMotionParameter ();
+		CurrentRoute = "a";
 		NextRoute = CurrentRoute;
+		Sections = 0;
 		target = GameObject.Find("NavRotue/"+CurrentRoute+"/0").transform;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(lm.getFingersNum() == 5)
+		if(LP.GetFingersNumber() == 5)
 		{
 			if(man.destination == man.nextPosition)//Stagnant
 			{
@@ -43,12 +51,12 @@ public class NavMeshTest : MonoBehaviour {
 				{
 					Debug.Log(CurrentRoute + " end");
 					StartWalking = false;
-					if(lm.Circle() == 1)
+					if(LG.Circle() == 1)
 					{
 						Debug.Log("--->");
 						setNextRoute("c");
 					}
-					else if(lm.Circle() == 2)
+					else if(LG.Circle() == 2)
 					{
 						Debug.Log("<---");
 						setNextRoute("b");
@@ -56,7 +64,7 @@ public class NavMeshTest : MonoBehaviour {
 				}
 			}
 		}
-		else if(lm.getFingersNum() < 4)
+		else if(LP.GetFingersNumber() < 4)
 		{
 			man.SetDestination(man.nextPosition);
 			StartWalking = true;

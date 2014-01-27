@@ -1,19 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using StoneAnt.LeapMotion;
+
 public class LMGesture {
-	private LeapMotion lm;
-	private float mouseX = 0.0f;
-	private float mouseY = 0.0f;
-	private float introY = 0.0f;
+	private LeapMotionGesture LG;
+	private LeapMotionParameter LP;
+	private float mouseX;
+	private float mouseY;
+	private float introY;
+	private Helper tool;
 
 	public LMGesture () {
-		lm = new LeapMotion();
+		LG = new LeapMotionGesture ();
+		LP = new LeapMotionParameter ();
+		tool = new Helper ();
+		mouseX = 0.0f;
+		mouseY = 0.0f;
+		introY = 0.0f;
 	}
 
 	public bool CheckLMConnection()
 	{
-		if(lm.CheckLMConnection())
+		if(LP.IsConnected())
 		{
 			return true;
 		}
@@ -25,23 +34,23 @@ public class LMGesture {
 
 	public float MoveHorizontal()
 	{
-		Vector3 movePosition = lm.PalmPosition(0,0,0,0);
+		Vector3 movePosition = tool.ToVector3(LP.GetPalmPosition());// lm.PalmPosition(0,0,0,0);
 		float x = movePosition.x;
 		return x;
 	}
 	public float MoveVertical()
 	{
-		Vector3 movePosition = lm.PalmPosition(0,0,0,0);
+		Vector3 movePosition = tool.ToVector3(LP.GetPalmPosition());//lm.PalmPosition(0,0,0,0);
 		float z = movePosition.z;
 		return z;
 	}
 
 	public float getMouseX() {
-		if(lm.getHandsNum() == 0 || lm.getFingersNum() > 2)
+		if(LP.GetHandsNumber() == 0 || LP.GetFingersNumber() > 2 || LP.GetFingersNumber() == 0)
 		{
 			return 0.0f;
 		}
-		Vector3 lookPosition = lm.FingertipPosition();
+		Vector3 lookPosition = tool.ToVector3(LP.GetFingertipPosition ());//lm.FingertipPosition();
 		if(lookPosition.x > 0)
 		{
 			if(lookPosition.x > 100)
@@ -93,28 +102,28 @@ public class LMGesture {
 			}
 
 		}
-		return mouseX;//-0.1 ~ 0.1(0.2)
+		return mouseX * 1.5f;//-0.1 ~ 0.1(0.2)
 	}
 
 	public float getMouseY() {
-		if(lm.getHandsNum() == 0 || lm.getFingersNum() > 2)
+		if(LP.GetHandsNumber() == 0 || LP.GetFingersNumber() > 2 || LP.GetFingersNumber() == 0)
 		{
 			return 0.0f;
 		}
-		if(lm.HandEnter())
-		{
-			introY = lm.FingertipPosition().y;
-		}
+		//if(lm.HandEnter())
+		//{
+		//	introY = LP.GetFingertipPosition().y;//lm.FingertipPosition().y;
+		//}
 		introY = 200.0f;
-		Vector3 lookPosition = lm.FingertipPosition();
+		Vector3 lookPosition = tool.ToVector3(LP.GetFingertipPosition());//lm.FingertipPosition();
 		if(lookPosition.y - introY > 50)
 		{
-			return 0.05f;
+			return 0.1f;
 		}
 		else if(lookPosition.y - introY < -50)
 		{
-			return -0.05f;
+			return -0.1f;
 		}
-		return mouseY;
+		return 0.0f;
 	}
 }
