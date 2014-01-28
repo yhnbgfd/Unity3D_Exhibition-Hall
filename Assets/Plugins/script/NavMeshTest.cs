@@ -34,7 +34,7 @@ public class NavMeshTest : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Inits the nav route.
+	/// 初始化节点关系数据
 	/// </summary>
 	private void initNavRoute()
 	{
@@ -67,12 +67,12 @@ public class NavMeshTest : MonoBehaviour {
 				{
 					Debug.Log(CurrentRoute + " end");
 					StartWalking = false;
-					if(LG.Circle() == 1)
+					if(LG.Circle() == 1)//顺时针
 					{
 						Debug.Log("--->");
 						setNextRoute(GetNextRoute(CurrentRoute, 0));
 					}
-					else if(LG.Circle() == 2)
+					else if(LG.Circle() == 2)//逆时针
 					{
 						Debug.Log("<---");
 						setNextRoute(GetNextRoute(CurrentRoute, 1));
@@ -88,7 +88,7 @@ public class NavMeshTest : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Sets the next route.
+	/// 设置当前节点为下一个节点
 	/// </summary>
 	/// <param name="route">Route.</param>
 	private void setNextRoute(string route)
@@ -106,10 +106,10 @@ public class NavMeshTest : MonoBehaviour {
 	/// <param name="NextRouteID">Next route I.</param>
 	private string GetNextRoute(string StartingPoint, int NextRouteID)
 	{
-		Debug.Log (StartingPoint +"_"+NextRouteID);
+		Debug.Log ("GetNextRoute"+StartingPoint +"_"+NextRouteID);
 		if(NavRoute.ContainsKey(StartingPoint))//存在这路径
 		{
-			if(NavRoute[StartingPoint].Length > NextRouteID)
+			if(NavRoute[StartingPoint].Length > NextRouteID)//节点在可选择的下一个节点范围内
 			{
 				Debug.Log("NextRoute: "+NavRoute[StartingPoint][NextRouteID]);
 				return NavRoute[StartingPoint][NextRouteID];
