@@ -102,8 +102,8 @@ public class NavMeshTest : MonoBehaviour {
 	/// 获取下一个路径节点
 	/// </summary>
 	/// <returns>The next route.</returns>
-	/// <param name="StartingPoint">Starting point.</param>
-	/// <param name="NextRouteID">Next route I.</param>
+	/// <param name="StartingPoint">当前起始节点</param>
+	/// <param name="NextRouteID">下一个节点的id</param>
 	private string GetNextRoute(string StartingPoint, int NextRouteID)
 	{
 		Debug.Log ("GetNextRoute"+StartingPoint +"_"+NextRouteID);
