@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Collections.Generic;
 
 using StoneAnt.LeapMotion;
 
 public class NavMeshTest : MonoBehaviour {
-	//private LeapMotion lm;
 	private LeapMotionGesture LG;
 	private LeapMotionParameter LP;
 	private NavMeshAgent man;
@@ -14,18 +15,33 @@ public class NavMeshTest : MonoBehaviour {
 	private string NextRoute;
 	private int Sections;
 
-	private bool StartWalking = true;
+	private bool StartWalking;
+
+	Dictionary<string,string[]> NavRoute;
 
 	// Use this for initialization
 	void Start () {
 		man = gameObject.GetComponent<NavMeshAgent>();
-		//lm = new LeapMotion();
 		LG = new LeapMotionGesture ();
 		LP = new LeapMotionParameter ();
 		CurrentRoute = "a";
 		NextRoute = CurrentRoute;
 		Sections = 0;
 		target = GameObject.Find("NavRotue/"+CurrentRoute+"/0").transform;
+		StartWalking = true;
+		NavRoute = new Dictionary<string, string[]> ();//用来存储路径对应关系
+		initNavRoute ();
+	}
+
+	/// <summary>
+	/// Inits the nav route.
+	/// </summary>
+	private void initNavRoute()
+	{
+		NavRoute.Add ("a",new string[]{"b","c"});
+		NavRoute.Add ("b",new string[]{"d","e","f"});
+		NavRoute.Add ("c",new string[]{"d","e","f"});
+		NavRoute.Add ("d",new string[]{"g","h"});
 	}
 	
 	// Update is called once per frame
@@ -54,12 +70,12 @@ public class NavMeshTest : MonoBehaviour {
 					if(LG.Circle() == 1)
 					{
 						Debug.Log("--->");
-						setNextRoute("c");
+						setNextRoute(GetNextRoute(CurrentRoute, 0));
 					}
 					else if(LG.Circle() == 2)
 					{
 						Debug.Log("<---");
-						setNextRoute("b");
+						setNextRoute(GetNextRoute(CurrentRoute, 1));
 					}
 				}
 			}
@@ -71,11 +87,35 @@ public class NavMeshTest : MonoBehaviour {
 		}
 	}
 
-	public void setNextRoute(string route)
+	/// <summary>
+	/// Sets the next route.
+	/// </summary>
+	/// <param name="route">Route.</param>
+	private void setNextRoute(string route)
 	{
 		CurrentRoute = route ;
 		Sections = -1;
 		StartWalking = true;
+	}
+
+	/// <summary>
+	/// 获取下一个路径节点
+	/// </summary>
+	/// <returns>The next route.</returns>
+	/// <param name="StartingPoint">Starting point.</param>
+	/// <param name="NextRouteID">Next route I.</param>
+	private string GetNextRoute(string StartingPoint, int NextRouteID)
+	{
+		Debug.Log (StartingPoint +"_"+NextRouteID);
+		if(NavRoute.ContainsKey(StartingPoint))//存在这路径
+		{
+			if(NavRoute[StartingPoint].Length > NextRouteID)
+			{
+				Debug.Log("NextRoute: "+NavRoute[StartingPoint][NextRouteID]);
+				return NavRoute[StartingPoint][NextRouteID];
+			}
+		}
+		return StartingPoint;
 	}
 
 }
