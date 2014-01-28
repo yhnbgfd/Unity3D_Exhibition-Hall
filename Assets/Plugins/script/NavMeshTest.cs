@@ -93,6 +93,10 @@ public class NavMeshTest : MonoBehaviour {
 	/// <param name="route">Route.</param>
 	private void setNextRoute(string route)
 	{
+		if(route == CurrentRoute)
+		{
+			return;
+		}
 		CurrentRoute = route ;
 		Sections = -1;
 		StartWalking = true;
@@ -106,12 +110,12 @@ public class NavMeshTest : MonoBehaviour {
 	/// <param name="NextRouteID">下一个节点的id</param>
 	private string GetNextRoute(string StartingPoint, int NextRouteID)
 	{
-		Debug.Log ("GetNextRoute"+StartingPoint +"_"+NextRouteID);
+		//Debug.Log ("GetNextRoute"+StartingPoint +"_"+NextRouteID);
 		if(NavRoute.ContainsKey(StartingPoint))//存在这路径
 		{
 			if(NavRoute[StartingPoint].Length > NextRouteID)//节点在可选择的下一个节点范围内
 			{
-				Debug.Log("NextRoute: "+NavRoute[StartingPoint][NextRouteID]);
+				//Debug.Log("NextRoute: "+NavRoute[StartingPoint][NextRouteID]);
 				return NavRoute[StartingPoint][NextRouteID];
 			}
 		}
