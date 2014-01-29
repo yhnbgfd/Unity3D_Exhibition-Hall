@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using ExhibitionHall.Common;
 
 using StoneAnt.LeapMotion;
 
@@ -29,19 +30,26 @@ public class NavMeshTest : MonoBehaviour {
 	/// 如果可以开始走动，标记true，一般是在静止状态下，且target刚刚被重新赋值后
 	/// </summary>
 	private bool StartWalking;
+	private class RoutePara
+	{
+		string[] path;
+
+	}
+
 	/// <summary>
 	/// 路径关系字典
 	/// </summary>
 	Dictionary<string,string[]> NavRoute;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		man = gameObject.GetComponent<NavMeshAgent>();
 		LG = new LeapMotionGesture ();
 		LP = new LeapMotionParameter ();
-		CurrentRoute = "a";
+		CurrentRoute = NavMeshPara.InitPath;
 		NextRoute = CurrentRoute;
-		Sections = 0;
+		Sections = NavMeshPara.InitSections;
 		target = GameObject.Find("NavRotue/"+CurrentRoute+"/0").transform;
 		StartWalking = true;
 		NavRoute = new Dictionary<string, string[]> ();//用来存储路径对应关系
