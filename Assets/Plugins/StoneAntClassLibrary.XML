@@ -65,6 +65,12 @@
             <param name="axis"></param>
             <returns></returns>
         </member>
+        <member name="M:StoneAnt.LeapMotion.LeapMotionGesture.HandsEnter">
+            <summary>
+            当从0有手进入识别范围且z小于0时，返回进入的手的数量
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:StoneAnt.LeapMotion.LeapMotionInitialize.#cctor">
             <summary>
             静态构造函数
@@ -136,13 +142,13 @@
         </member>
         <member name="M:StoneAnt.LeapMotion.LeapMotionParameter.GetFingersID">
             <summary>
-            获取第一只手的手指的ID
+            获取第一只手的所有手指的ID
             </summary>
             <returns></returns>
         </member>
         <member name="M:StoneAnt.LeapMotion.LeapMotionParameter.GetFingersID(Leap.Frame)">
             <summary>
-            获取第一只手的手指的ID
+            获取第一只手的所有手指的ID
             </summary>
             <param name="LMFrame"></param>
             <returns></returns>
