@@ -114,7 +114,7 @@ public class LMGesture {
 		//{
 		//	introY = LP.GetFingertipPosition().y;//lm.FingertipPosition().y;
 		//}
-		introY = 200.0f;
+		introY = 200.0f;//这里固定200高度为0点了。待解决
 		Vector3 lookPosition = tool.ToVector3(LP.GetFingertipPosition());//lm.FingertipPosition();
 		if(lookPosition.y - introY > 50)
 		{

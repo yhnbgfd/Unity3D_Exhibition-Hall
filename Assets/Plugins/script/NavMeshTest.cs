@@ -9,14 +9,29 @@ public class NavMeshTest : MonoBehaviour {
 	private LeapMotionGesture LG;
 	private LeapMotionParameter LP;
 	private NavMeshAgent man;
+	/// <summary>
+	/// 自动寻路目标位置（cube）
+	/// </summary>
 	private Transform target;
-
+	/// <summary>
+	/// 当前路线
+	/// </summary>
 	private string CurrentRoute;
+	/// <summary>
+	/// 下一个路线
+	/// </summary>
 	private string NextRoute;
+	/// <summary>
+	/// 路线节点
+	/// </summary>
 	private int Sections;
-
+	/// <summary>
+	/// 在某条路线上行走过程中，标记true
+	/// </summary>
 	private bool StartWalking;
-
+	/// <summary>
+	/// 路径关系字典
+	/// </summary>
 	Dictionary<string,string[]> NavRoute;
 
 	// Use this for initialization
@@ -65,14 +80,14 @@ public class NavMeshTest : MonoBehaviour {
 				}
 				else
 				{
-					Debug.Log(CurrentRoute + " end");
 					StartWalking = false;
-					if(LG.Circle() == 1)//顺时针
+					Debug.Log(CurrentRoute + " end");//这里可以加入走完路时的触发事件
+					if(LG.Circle() == 1)
 					{
 						Debug.Log("--->");
 						setNextRoute(GetNextRoute(CurrentRoute, 0));
 					}
-					else if(LG.Circle() == 2)//逆时针
+					else if(LG.Circle() == 2)
 					{
 						Debug.Log("<---");
 						setNextRoute(GetNextRoute(CurrentRoute, 1));
