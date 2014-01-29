@@ -127,14 +127,7 @@ public class NavMeshTest : MonoBehaviour {
 	/// <param name="id">Identifier.</param>
 	public void setNextRoute(int id)
 	{
-		string route = GetNextRoute (CurrentRoute, id);
-		if(route == CurrentRoute)
-		{
-			return;
-		}
-		CurrentRoute = route ;
-		Sections = -1;
-		StartWalking = true;
+		setNextRoute (GetNextRoute (CurrentRoute, id));
 	}
 
 	/// <summary>
