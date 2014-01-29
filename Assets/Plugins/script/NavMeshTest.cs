@@ -26,7 +26,7 @@ public class NavMeshTest : MonoBehaviour {
 	/// </summary>
 	private int Sections;
 	/// <summary>
-	/// 在某条路线上行走过程中，标记true
+	/// 如果可以开始走动，标记true，一般是在静止状态下，且target刚刚被重新赋值后
 	/// </summary>
 	private bool StartWalking;
 	/// <summary>
@@ -63,25 +63,28 @@ public class NavMeshTest : MonoBehaviour {
 	void Update () {
 		if(LP.GetFingersNumber() == 5)
 		{
-			if(man.destination == man.nextPosition)//Stagnant
+			if(man.destination == man.nextPosition)//静止
 			{
 				//if(man.destination != target.position)//problem:Invalid
 				if(StartWalking)
 				{
 					man.SetDestination(target.position);
-					Debug.Log("man.SetDestination");
-					StartWalking = false;
+					//Debug.Log("man.SetDestination");
+					StartWalking = false;//开始走了，标记false
 				}
+				//如果静止，查找当前路线的下一节点
 				else if(GameObject.Find("NavRotue/"+CurrentRoute+"/" + (++Sections).ToString() ))
 				{
 					Debug.Log("find: "+CurrentRoute+"_"+Sections);
 					target = GameObject.Find("NavRotue/"+CurrentRoute+"/" + Sections.ToString() ).transform;
 					StartWalking = true;
 				}
+				//如果静止，且没找到当前路线的下一节点，则当前路线已走完
 				else
 				{
 					StartWalking = false;
 					Debug.Log(CurrentRoute + " end");//这里可以加入走完路时的触发事件
+					//下一路线切换判断
 					if(LG.Circle() == 1)
 					{
 						Debug.Log("--->");
@@ -92,6 +95,7 @@ public class NavMeshTest : MonoBehaviour {
 						Debug.Log("<---");
 						setNextRoute(GetNextRoute(CurrentRoute, 1));
 					}
+					//下一路线切换判断^
 				}
 			}
 		}
@@ -103,11 +107,27 @@ public class NavMeshTest : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// 设置当前节点为下一个节点
+	/// 设置下一个路线
 	/// </summary>
 	/// <param name="route">Route.</param>
-	private void setNextRoute(string route)
+	public void setNextRoute(string route)
 	{
+		if(route == CurrentRoute)
+		{
+			return;
+		}
+		CurrentRoute = route ;
+		Sections = -1;
+		StartWalking = true;
+	}
+
+	/// <summary>
+	/// 设置下一个路线
+	/// </summary>
+	/// <param name="id">Identifier.</param>
+	public void setNextRoute(int id)
+	{
+		string route = GetNextRoute (CurrentRoute, id);
 		if(route == CurrentRoute)
 		{
 			return;
@@ -136,5 +156,4 @@ public class NavMeshTest : MonoBehaviour {
 		}
 		return StartingPoint;
 	}
-
 }
